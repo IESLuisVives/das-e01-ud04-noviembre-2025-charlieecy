@@ -1,0 +1,46 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: run
+    restart: always
+    networks:
+      - webnet
+  estudiante:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: estudiante
+    restart: always
+    networks:
+      - webnet
+  dni:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dni
+    volumes:
+      - ./proxy/auth-docs/.htpasswd:/usr/local/apache2/conf/.htpasswd
+      - ./proxy/conf/httpd-auth.conf:/usr/local/apache2/conf/httpd-auth.conf
+    networks:
+      - webnet
+  proxy:
+    image: ubuntu/nginx
+    container_name: proxy_server
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./proxy/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./proxy/certs:/etc/nginx/certs
+    restart: always
+    depends_on:
+      - estudiante
+      - dni
+      - app
+    networks:
+      - webnet
+networks:
+  webnet:
+    driver: bridge
