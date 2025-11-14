@@ -1,10 +1,10 @@
 # Datos del alumno/a
 
-Nombre: Tu nombre y Dos apellidos
+Nombre: Carlos Cortés Yagüe
 
-Curso: 1DAW o 2DAW
+Curso: 2DAW
 
-Email: tu email de IES Luis Vives o EducaMadrid
+Email: carlos.cortes@alumno.iesluisvives.org
 
-Nick GitHub: Tu nick de GitHub
+Nick GitHub: charlieecy
 
